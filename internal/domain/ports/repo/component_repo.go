@@ -7,9 +7,13 @@ import (
 
 type ComponentRepo interface {
 	CreateComponent(ctx context.Context, service *models.Component) error
-	GetComponentByID(ctx context.Context, serviceID int) (*models.Component, error)
-	GetPublishedComponents(ctx context.Context, minPower float64) ([]models.Component, error)
-	GetDraftByCreator(ctx context.Context, creatorID int) (*models.Component, error)
-	PublishComponent(ctx context.Context, id int) error
+
+	ReadComponentByID(ctx context.Context, componentID uint16) (models.Component, error)
+	ReadNextPublishedByID(ctx context.Context, componentID uint16) (models.Component, error)
+	ReadPublishedByID(ctx context.Context, componentID uint16) (models.Component, error)
+	ReadComponentsList(ctx context.Context, minPower float64) ([]models.Component, error)
+	ReadDraftByUser(ctx context.Context, userID uint) (models.Component, error)
+
+	UpdateComponent(ctx context.Context, component models.Component) error
 	DeleteComponentSQL(ctx context.Context, id int) error
 }
