@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Черновик — ТеплоКаталог</title>
+    <link rel="stylesheet" href="/static/css/thermal.css">
+</head>
+
+<body>
+    <div class="screen">
+
+        <div class="topbar on-light static">
+            <div class="topbar__brand">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M10 13.5V4a2 2 0 1 1 4 0v9.5a4 4 0 1 1-4 0z" />
+                    <line x1="12" y1="7" x2="12" y2="12" />
+                </svg>
+                ТеплоКаталог
+            </div>
+            <div class="topbar__category">Черновик</div>
+        </div>
+
+        <div class="page flush-top">
+
+            <span class="draft-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M12 20h9" />
+                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                </svg>
+                Черновик · не опубликовано
+            </span>
+
+            <h1 class="page-title">Новая карточка</h1>
+            <p class="page-lead">Заполните поля и нажмите «Далее» — карточка сохранится как черновик.</p>
+
+            <form method="post" action="/component/draft" enctype="multipart/form-data">
+
+                <div class="form-section">
+                    <div class="form-section__title">Медиа</div>
+
+                    <label class="media-drop">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 16V4M12 4l-4 4M12 4l4 4" />
+                            <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+                        </svg>
+                        <div class="media-drop__text">
+                            <b>Изображение</b>
+                            <input type="file" name="image" accept="image/*">
+                        </div>
+                    </label>
+
+                    <label class="media-drop">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="6" width="14" height="12" rx="2" />
+                            <path d="M16 10l6-3v10l-6-3" />
+                        </svg>
+                        <div class="media-drop__text">
+                            <b>Видео</b>
+                            <input type="file" name="video" accept="video/mp4">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section__title">Описание</div>
+
+                    <div class="form-row">
+                        <label for="f-name">Название</label>
+                        <input type="text" id="f-name" name="name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="f-desc">Краткое описание</label>
+                        <textarea id="f-desc" name="component_description"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="f-type">Тип компонента</label>
+                        <select id="f-type" name="component_type">
+                            <option>Резистор</option>
+                            <option>Конденсатор</option>
+                            <option>Транзистор</option>
+                            <option>Диод</option>
+                            <option>Микроконтроллер</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-section__title">Тепловые параметры</div>
+
+                    <div class="pair-row">
+                        <div class="form-row">
+                            <label for="f-power">Рас. мощность, Вт</label>
+                            <input type="number" id="f-power" name="power" step="0.01" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="f-rth">RθJA, °C/Вт</label>
+                            <input type="number" id="f-rth" name="thermal_resistance" step="0.1" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="next-btn" type="submit">Далее</button>
+            </form>
+        </div>
+
+        <nav class="tabbar">
+            <a href="/component?id=1" class="tab-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="3" width="16" height="18" rx="3" />
+                    <path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none" />
+                </svg>
+                Лента
+            </a>
+            <a href="/component/draft" class="tab-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 8v8M8 12h8" />
+                </svg>
+                Добавление
+            </a>
+            <a href="/catalog" class="tab-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="8" height="8" rx="1.5" />
+                    <rect x="13" y="3" width="8" height="8" rx="1.5" />
+                    <rect x="3" y="13" width="8" height="8" rx="1.5" />
+                    <rect x="13" y="13" width="8" height="8" rx="1.5" />
+                </svg>
+                Плитка
+            </a>
+        </nav>
+
+    </div>
+</body>
+
+</html>
