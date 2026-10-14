@@ -11,18 +11,26 @@ type Config struct {
 	AppConfig
 
 	PostgresConfig
-	MinioConfif
+	MinioConfig
 }
 
 func LoadFromEnv() *Config {
 	if err := godotenv.Load(); err != nil {
-		log.Fatalf("can't load config settings from .env, error=%s", err)
+		log.Fatalf("can't load .env: %v", err)
 	}
 
 	cfg := &Config{}
 
-	if err := env.Parse(cfg); err != nil {
-		log.Fatalf("can't load config from env file, error=%s", err)
+	if err := env.Parse(&cfg.AppConfig); err != nil {
+		log.Fatalf("can't parse app config: %v", err)
+	}
+
+	if err := env.Parse(&cfg.PostgresConfig); err != nil {
+		log.Fatalf("can't parse postgres config: %v", err)
+	}
+
+	if err := env.Parse(&cfg.MinioConfig); err != nil {
+		log.Fatalf("can't parse minio config: %v", err)
 	}
 
 	return cfg
