@@ -17,13 +17,13 @@ func (f *Factory) NewRepos() (repo.ComponentRepo, repo.LikeRepo, repo.UserRepo) 
 }
 
 func (f *Factory) NewUserRepo(db *gorm.DB) repo.UserRepo {
-	return gormrepo.NewUserRepo(db)
+	return postgres.NewUserRepo(db)
 }
 
 func (f *Factory) NewComponetRepo(db *gorm.DB) repo.ComponentRepo {
-	return gormrepo.NewComponentRepo(db)
+	return postgres.NewComponentRepo(db)
 }
 
 func (f *Factory) NewLikeRepo(db *gorm.DB) repo.LikeRepo {
-	return gormrepo.NewLikeRepo(db)
+	return postgres.NewLikeRepo(db)
 }

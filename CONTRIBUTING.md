@@ -6,9 +6,10 @@
 
 ### 1.1. Main Branches
 
-| Branch | Description |
-| --- | --- |
-| `main` | Основная ветка проекта |
+
+| Branch  | Description                                        |
+| ------- | -------------------------------------------------- |
+| `main`  | Основная ветка проекта         |
 | `lab-1` | Первая лабораторная работа |
 | `lab-2` | Вторая лабораторная работа |
 | `lab-3` | Третья лабораторная работа |
@@ -17,12 +18,13 @@
 
 Для выполнения отдельных задач используются ветки с соответствующими префиксами.
 
-| Prefix | Description | Example |
-| --- | --- | --- |
-| `[dev]` | Разработка функциональности | `[dev] lab-1-feature` |
+
+| Prefix    | Description                                           | Example                    |
+| --------- | ----------------------------------------------------- | -------------------------- |
+| `[dev]`   | Разработка функциональности | `[dev] lab-1-feature`      |
 | `[tests]` | Написание и изменение тестов | `[tests] lab-1-unit-tests` |
-| `[fix]` | Исправление ошибок | `[fix] lab-1-validation` |
-| `[style]` | Форматирование кода | `[style] lab-2-formatting` |
+| `[fix]`   | Исправление ошибок                   | `[fix] lab-1-validation`   |
+| `[style]` | Форматирование кода                 | `[style] lab-2-formatting` |
 
 ### 1.3. Branch Naming Rules
 
@@ -39,9 +41,9 @@ Examples:
 
 ```text
 main
-lab-1
-lab-2
-lab-3
+lab1
+lab2
+lab3
 
 [dev] lab-1-feature
 [dev] lab-2-data-processing
@@ -51,3 +53,4 @@ lab-3
 [fix] lab-1-validation
 [docs] lab-2-readme
 [refactor] lab-3-code-cleanup
+```

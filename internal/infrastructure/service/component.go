@@ -33,7 +33,7 @@ func (s *ComponentService) PublishDraft(
 		return fmt.Errorf("can't access component by id %v: %w", componentID, err)
 	}
 
-	if status == models.StatusDraft{
+	if status == models.StatusDraft {
 		return fmt.Errorf("can't change status to черновик")
 	}
 
