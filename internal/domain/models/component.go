@@ -21,16 +21,18 @@ const (
 )
 
 type Component struct {
-	ComponentID          int               `json:"component_id"`
-	ComponentName        string            `json:"component_name"`
-	ComponentDescription string            `json:"component_description"`
-	ComponentStatus      ServiceStatusEnum `json:"component_status"`
-	ImageURL             string            `json:"image_url"`
-	VideoURL             string            `json:"video_url"`
-	ComponentType        ComponentType     `json:"component_type"`
-	CreatedAt            time.Time         `json:"created_at"`
-	CreatorID            int               `json:"creator_id"`
-	GeneratedAt          time.Time         `json:"generated_at"`
-	PowerDissipation     float64           `json:"power_dissipation"`
-	ThermalResistance    float64           `json:"thermal_resistance"`
+	ComponentID          int               `gorm:"primaryKey;autoIncrement" json:"component_id"`
+	ComponentName        string            `gorm:"size:255;not null" json:"component_name"`
+	ComponentDescription string            `gorm:"type:text" json:"component_description"`
+	ComponentStatus      ServiceStatusEnum `gorm:"size:32;default:черновик;index" json:"component_status"`
+	ImageURL             string            `gorm:"size:255" json:"image_url"`
+	VideoURL             string            `gorm:"size:255" json:"video_url"`
+	ComponentType        ComponentType     `gorm:"size:64" json:"component_type"`
+	CreatedAt            time.Time         `gorm:"autoCreateTime" json:"created_at"`
+	GeneratedAt          *time.Time        `json:"generated_at"`
+	PowerDissipation     float64           `gorm:"not null" json:"power_dissipation"`
+	ThermalResistance    float64           `gorm:"not null" json:"thermal_resistance"`
+
+	CreatorID int  `gorm:"index" json:"creator_id"`
+	Creator   User `gorm:"foreignKey:CreatorID;references:UserID;constraint:OnDelete:RESTRICT" json:"-"`
 }
