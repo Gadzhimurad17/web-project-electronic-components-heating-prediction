@@ -124,9 +124,16 @@ func (h *Handlers) LikeComponent(c *gin.Context) {
 
 func (h *Handlers) CreateComponent(c *gin.Context) {
 	req := dto.ComponentRequest{}
-
 	if err := c.ShouldBind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if req.VideoFile == nil || req.ImageFile == nil {
+
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "can`t open file",
+		})
 		return
 	}
 
@@ -150,6 +157,7 @@ func (h *Handlers) CreateComponent(c *gin.Context) {
 		})
 		return
 	}
+
 	c.JSON(http.StatusCreated, gin.H{
 		"message": "component created succusfully",
 	})

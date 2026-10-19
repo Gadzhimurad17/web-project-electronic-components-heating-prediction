@@ -3,7 +3,6 @@ package minio
 import (
 	"context"
 	"heating-prediction/internal/domain/models"
-	"log/slog"
 
 	"github.com/minio/minio-go/v7"
 )
@@ -13,7 +12,7 @@ type minioFileRepo struct {
 	bucket string
 }
 
-func NewMinioFileRepo(mc *minio.Client, bucket string, log *slog.Logger) *minioFileRepo {
+func NewMinioFileRepo(mc *minio.Client, bucket string) *minioFileRepo {
 	return &minioFileRepo{
 		mc:     mc,
 		bucket: bucket,
@@ -31,4 +30,4 @@ func (r *minioFileRepo) Upload(ctx context.Context, metadata *models.ContentMeta
 
 	return nil
 }
-func (r *minioFileRepo) Download(ctx context.Context)
+//func (r *minioFileRepo) Download(ctx context.Context)
