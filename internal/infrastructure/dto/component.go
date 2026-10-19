@@ -1,15 +1,21 @@
 package dto
 
-import "heating-prediction/internal/domain/models"
+import (
+	"heating-prediction/internal/domain/models"
+	"mime/multipart"
+)
 
 type ComponentRequest struct {
-    ComponentName        string
-    ComponentDescription string
-    ComponentType        models.ComponentType
-    PowerDissipation     float64
-    ThermalResistance    float64
+	ComponentName        string                `form:"component_name" binding:"required"`
+	ComponentDescription string                `form:"component_description"`
+	ComponentType        models.ComponentType  `form:"component_type" binding:"required"`
+	VideoFile            *multipart.FileHeader `form:"video_file"`
+	ImageFile            *multipart.FileHeader `form:"image_file"`
+	PowerDissipation     float64               `form:"power_dissipation" binding:"gte=0"`
+	ThermalResistance    float64               `form:"thermal_resistance" binding:"gte=0"`
 }
-
+type ComponentResponse struct {
+}
 type LikeRequest struct {
-    Value int // 0 или 1
+	Value int // 0 или 1
 }

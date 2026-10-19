@@ -1,5 +1,7 @@
 package models
 
+import "io"
+
 type ContentType string
 
 const (
@@ -8,6 +10,8 @@ const (
 )
 
 type ContentMetadata struct {
+	URL      string
+	File     io.Reader
 	Type     ContentType
 	MimeType string
 	Size     int64
