@@ -9,7 +9,7 @@ import (
 
 type Config struct {
 	AppConfig
-
+	RedisConfig
 	PostgresConfig
 	MinioConfig
 }

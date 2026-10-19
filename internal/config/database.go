@@ -1,6 +1,9 @@
 package config
 
-import "fmt"
+import (
+	"fmt"
+	"net"
+)
 
 type PostgresConfig struct {
 	DbHost     string `env:"DB_HOST"`
@@ -19,4 +22,15 @@ func (pcfg *PostgresConfig) POSTGRES_DSN() string {
 		pcfg.DbPassword,
 		pcfg.DbName,
 	)
+}
+
+type RedisConfig struct {
+	RedisHost     string `env:"REDIS_HOST"`
+	RedisPort     string `env:"REDIS_PORT"`
+	RedisPassword string `env:"REDIS_PASSWORD"`
+	RedisDatabase int    `env:"REDIS_DATABASE"`
+}
+
+func (r *RedisConfig) REDIS_DSN() string {
+	return net.JoinHostPort(r.RedisHost, r.RedisPort)
 }
