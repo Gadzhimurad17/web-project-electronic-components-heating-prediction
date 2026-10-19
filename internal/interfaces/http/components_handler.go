@@ -2,6 +2,7 @@ package http
 
 import (
 	"heating-prediction/internal/domain/models"
+	"heating-prediction/internal/infrastructure/dto"
 	"net/http"
 	"strconv"
 
@@ -122,5 +123,34 @@ func (h *Handlers) LikeComponent(c *gin.Context) {
 }
 
 func (h *Handlers) CreateComponent(c *gin.Context) {
+	req := dto.ComponentRequest{}
 
+	if err := c.ShouldBind(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	video, err := req.VideoFile.Open()
+	if err != nil {
+		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer video.Close()
+
+	image, err := req.ImageFile.Open()
+	if err != nil {
+		http.Error(c.Writer, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer image.Close()
+
+	if err := h.Service.CreateComponent(c.Request.Context(), &req, video, image); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "component created succusfully",
+	})
 }
