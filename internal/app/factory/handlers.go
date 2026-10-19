@@ -7,8 +7,8 @@ import (
 )
 
 func (f *Factory) NewHandlers() *http.Handlers {
-	componentRepo, likeRepo, userRepo := f.NewRepos()
-	authService, componentService := f.NewServices(userRepo, componentRepo, likeRepo)
+	componentRepo, likeRepo, userRepo, fileRepo := f.NewRepos()
+	authService, componentService := f.NewServices(userRepo, componentRepo, likeRepo, fileRepo)
 	return &http.Handlers{
 		Service: componentService,
 		Auth:    authService,
