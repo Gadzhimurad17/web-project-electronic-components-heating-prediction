@@ -14,9 +14,11 @@ func Connect(cfg *config.Config) *redis.Client {
 		Password: cfg.RedisPassword,
 		DB:       cfg.RedisDatabase,
 	})
+
 	err := client.Ping(context.Background()).Err()
 	if err != nil {
 		log.Fatalf("can't connect to redis server %s", err)
 	}
+	
 	return client
 }

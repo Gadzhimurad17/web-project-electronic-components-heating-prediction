@@ -14,7 +14,8 @@ import (
 var ErrEmailTaken = errors.New("email already taken")
 
 type AuthService struct {
-	userRepo repo.UserRepo
+	userRepo  repo.UserRepo
+	tokenRepo repo.TokenRepo
 }
 
 func NewAuthService(userRepo repo.UserRepo) *AuthService {
